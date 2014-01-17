@@ -5,6 +5,8 @@ var request = require('request');
 var templates = require('./lib/templates');
 var app = express();
 var knox = require('knox');
+var production = 'http://morning-temple-6166.herokuapp.com';
+var test = 'http://localhost:5000';
 var client = knox.createClient({
   key: process.env.AMAZONKEY,
   secret: process.env.AMAZONSECRET,
@@ -14,7 +16,7 @@ var foursquareConfig = {
   secrets : {
     'clientId' : process.env.FOURSQUARECLIENT,
     'clientSecret' : process.env.FOURSQUARESECRET,
-    'redirectUrl' : 'http://localhost:5000/4sq-redirect'
+    'redirectUrl' : production + '/4sq-redirect'
   }
 }
 var foursquare = require('node-4sq')(foursquareConfig);
@@ -26,8 +28,7 @@ app.use(express.bodyParser({limit: '50mb'}));
 
 // Prompt user to authenticate with Strava.
 app.get('/', function(req, res) {
-  // res.send(templates['Home']({ url: 'http://localhost:5000' }));
-  res.send(templates['Home']({ url: 'http://powerful-spire-4042.herokuapp.com/' }));
+  res.send(templates['Home']({ url: production }));
 });
 
 // Do Strava token exchange, and return a page of activities

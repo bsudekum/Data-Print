@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'/>
+  <title>Location Print</title>
+  <script>window.L_PREFER_CANVAS = true;</script>
+  <link href='//api.tiles.mapbox.com/mapbox.js/v1.5.1/mapbox.css' rel='stylesheet' />
+  <link href='css/bootstrap.css' rel='stylesheet' />
+  <link href='css/bootstrap.css' rel='stylesheet' />
+  <link href='css/main.css' rel='stylesheet' />
+  <link href='css/font-awesome.min.css' rel='stylesheet'>
+  <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'> -->
+</head>
+<body>
+<div id='map'></div>
+<div class='container'>
+  <div class='row clearfix'>
+    <div class='col-lg-9'></div>
+    <br>
+    <div class='col-lg-3'>
+      <h4>1. Choose Map Style</h4>
+      <ul class='map-style map clearfix'></ul>
+      <h4>2. Choose Color Style</h4>
+      <ul class='map-style line clearfix'>
+        <li>
+          <img src="https://playfoursquare.s3.amazonaws.com/press/logo/icon-36x36.png" alt="" height='32px' width='32px' class='foursquareIcon'>
+        </li>
+      </ul>
+      <div class="markerSection">
+        <h4>3. Marker Style</h4>
+        <button type='button'class='btn btn-default'>Cirlce</button> 
+        <button type='button'class='btn btn-default'>Marker</button>
+        <button type='button'class='btn btn-default'>4sq Icons</button>
+      </div>
+      <div class="widthSelection">
+        <h4>3. Width</h4>
+        1px <input type='range' name='width' min='1' max='20' class='width'> 20px
+      </div>
+      <h4>4. Opacity</h4>
+      0% <input type='range' name='opacity' min='0' max='100' class='opacity'> 100%
+      <br>
+      <br>
+      <button type='button' id='output' class='btn btn-success btn-block'>Submit!</button>
+      <div id="cp-store-root" data-cp-settings='{ "access_key": "3b97a9fb160d11e3290a88d8e805d9e5", "modal": true }'></div>
+      <button data-cp-url="https://s3.amazonaws.com/canvaspop-popupstore-dev/2013/09/15/originals/516bb914bb2bf0b6fa5ddf42ebcc3993/1ffab4942c0bb66a4b509ebc60737036.JPG" class='buynow'>Buy Now</button>
+  </div>
+</div><!-- /container -->
+
+</body>
+<script>
+  var acts = <%= activitie %>
+</script>
+<script src='js/jquery.js'></script>
+<script src='js/mapbox.js'></script>
+<script src='js/leaflet-image.js'></script>
+<script src='js/bootstrap.min.js'></script>
+<script src='js/encode.js'></script>
+<script src='js/main.js'></script>
+<script src='js/main4sq.js'></script>
+<script src='js/mainStrava.js'></script>
+<script>
+</script>
+</html>

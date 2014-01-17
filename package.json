@@ -1,0 +1,23 @@
+{
+  "name": "Location-Print",
+  "version": "0.0.1",
+  "description": "Print your strava runs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "author": "Bobby Sudekum",
+  "dependencies": {
+    "express": "3.4.7",
+    "request": "2.27.0",
+    "underscore": "1.5.2",
+    "knox": "~0.8.8",
+    "pdfkit": "~0.2.6",
+    "lob": "~1.0.1",
+    "node-4sq": "~0.1.7"
+  }
+}

@@ -69,7 +69,7 @@
 
 </body>
 <script>
-  var acts = <%= activitie %> 
+  var acts = <%= activitie %>
   // console.log(athlete)
 </script>
 <script src='js/jquery.js'></script>

@@ -47,6 +47,7 @@ app.get('/activities', function(req, res) {
 
         try {
             var tok = JSON.parse(resp.body);
+            console.log(tok)
             var athleteInfo = tok.athlete;
         } catch (err) {
             res.send(500);
@@ -58,7 +59,7 @@ app.get('/activities', function(req, res) {
         }, function(err, acts) {
             res.send(templates['Activities']({
                 activitie: JSON.stringify(acts),
-                // athlete: JSON.stringify(athleteInfo)
+                athlete: JSON.stringify(athleteInfo)
             }));
         });
 
@@ -143,7 +144,8 @@ app.get('/4sq-redirect', function(req, res) {
                             requestMult(limitOffset += 250)
                         } else {
                             res.send(templates['Activities']({
-                                activitie: JSON.stringify(allData)
+                                activitie: JSON.stringify(allData),
+                                athlete: JSON.stringify(0)
                             }));
                         }
 

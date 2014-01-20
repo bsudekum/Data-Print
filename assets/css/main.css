@@ -532,7 +532,7 @@ body.strava .markerSection {
   width: 290px;
   background: rgba(255, 255, 255, 0.92);
   overflow: scroll;
-  height: 550px;
+  max-height: 700px;
 }
 
 .buynow, .mymodal {

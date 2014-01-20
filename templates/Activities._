@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset='UTF-8'/>
-  <title>Location Print</title>
+  <title>Data Print</title>
   <script>window.L_PREFER_CANVAS = true;</script>
   <link href='//api.tiles.mapbox.com/mapbox.js/v1.6.0/mapbox.css' rel='stylesheet' />
   <link href='css/bootstrap.css' rel='stylesheet' />
@@ -35,9 +35,21 @@
       <input type='range' name='opacity' min='0' max='100' class='opacity'>
       <br>
       <br>
-      <button type='button' id='output' class='btn btn-success btn-block'>Generate Print!</button>
-      <div id='cp-store-root' data-cp-settings='{ 'access_key': '3b97a9fb160d11e3290a88d8e805d9e5', 'modal': true }'></div>
-      <button data-cp-url='' class='buynow'></button>
+      <button type='button' id='output' class='btn btn-success btn-block'>Generate Print</button>
+      <br>
+      <div id="cp-store-root" data-cp-settings='{ "access_key": "3b97a9fb160d11e3290a88d8e805d9e5", "modal": true }'></div>
+        <script>
+            (function ( d, s, id ) {
+                var js, cpJs = d.getElementsByTagName( s )[0], t = new Date();
+                if ( d.getElementById( id ) ) return;
+                js = d.createElement( s );
+                js.id = id;
+                js.setAttribute( 'data-cp-url', 'https://store.canvaspop.com' );
+                js.src = 'https://store.canvaspop.com/static/js/cpopstore.js?bust=' + t.getTime();
+                cpJs.parentNode.insertBefore( js, cpJs );
+            }( document, 'script', 'canvaspop-jssdk' ));
+        </script>
+        <button data-cp-url="https://s3.amazonaws.com/canvaspop-popupstore-dev/2013/09/15/originals/516bb914bb2bf0b6fa5ddf42ebcc3993/1ffab4942c0bb66a4b509ebc60737036.JPG" class='buynow'>Buy Now</button>
       
       <!-- Button trigger modal -->
       <button class='btn btn-primary btn-lg mymodal' data-toggle='modal' data-target='#myModal'>
@@ -70,7 +82,7 @@
 </body>
 <script>
   var acts = <%= activitie %>
-  // console.log(athlete)
+  var athlete = <%= athlete %>
 </script>
 <script src='js/jquery.js'></script>
 <script src='js/mapbox.js'></script>

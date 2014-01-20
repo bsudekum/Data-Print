@@ -81,7 +81,7 @@
     });
 
     $('#output').click(function() {
-        $('.mymodal').click()
+        $('#myModal').modal('show')
         $(this).attr('disabled', 'disabled');
         // $('#map').css('height', '200%');
         // $('#map').css('width', '200%');
@@ -104,9 +104,10 @@
             success: function(e) {
                 $('.progress-bar').css('width', '90%');
                 var data = JSON.parse(e.data);
-                $('.buynow').attr('data-cp-url', data.url).click();
                 $('.progress-bar').css('width', '100%');
-                $('.currently').html('Done! <a href="' + data.url + '" target=_blank>link</a>');
+                $('.currently').html('Done!');
+                $('#myModal').modal('hide');
+                $('.buynow').attr('data-cp-url', data.url).click();
             }
         });
         $('.progress-bar').css('width', '70%');
@@ -123,7 +124,6 @@
             }).addTo(geoGroup);
 
             if (i == userData.length - 1) {
-                // map.fitBounds(geoGroup.getBounds());
                 map.addLayer(geoGroup);
             }
         }

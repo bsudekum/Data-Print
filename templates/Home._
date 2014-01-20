@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'/>
+  <title>Location Print</title>
+  <link href='css/bootstrap.css' rel='stylesheet' />
+  <link href='css/main.css' rel='stylesheet' />
+  <link href='css/font-awesome.min.css' rel='stylesheet'>
+</head>
+<body>
+	<!-- ========== HEADER SECTION ========== -->
+	<section id='home' name='home'></section>
+	<div id='headerwrap'>
+		<div class='container'>
+			<h1>Data Print</h1>
+			<br>
+			<br>
+			<a href='https://www.strava.com/oauth/authorize?client_id=397&response_type=code&redirect_uri=<%= url %>/activities&scope=view_private&state=registered' class='connect'>
+        		<img src='/images/ConnectWithStrava@2x.png' height='39px'> 
+    		</a>
+    		<a href='/4sq-login' class='connect'>
+        		<img src='/images/connect-blue@2x.png' height='42px'>
+    		</a>
+		</div><!-- /container -->
+	</div><!-- /headerwrap -->
+	<div id='w'>
+		<div class='container'>
+			<div class='row'>
+				<div class='col-lg-8 col-lg-offset-2'>
+				<h2>Print stunning images of your location data</h2>
+				</div>
+			</div>
+		</div><!-- /container -->
+	</div>
+	<div id='dg'>
+		<div class='container'>
+			<div class='row'>
+				<h3>Options</h3>
+				<br>
+				<div class='col-lg-4'>
+					<img src='images/strava-example.png' width='80%'>
+					<h4>Strava</h4>
+				</div>
+				<div class='col-lg-4'>
+					<img src='images/foursquare-example.png' width='80%'>
+					<h4>Foursquare</h4>
+				</div>
+				<div class='col-lg-4'>
+					<img src='images/twitter-example.png' width='80%'>
+					<h4>Twitter - Coming Soon</h4>
+				</div>	
+			</div>	
+		</div><!-- /container -->
+	</div>
+	<div id="c">
+		<div class="container">
+			<p>Created by <a href="http://visuallybs.com">Bobby Sudekum</a></p>
+		</div>
+	</div>
+</body>
+<script src='//code.jquery.com/jquery-1.8.2.min.js'></script>
+<script src='js/bootstrap.min.js'></script>
+<script src='js/main.js'></script>
+</html>

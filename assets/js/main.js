@@ -120,7 +120,7 @@
             L.polyline(poly.getLatLngs(), {
                 'color': '#F86767',
                 'opacity': '.8',
-                'weight': '12'
+                'weight': '4'
             }).addTo(geoGroup);
 
             if (i == userData.length - 1) {

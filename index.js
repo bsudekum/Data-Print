@@ -30,9 +30,6 @@ app.use(express.bodyParser({
     limit: '50mb'
 }));
 
-console.log(process.env.FOURSQUARESECRET)
-console.log(process.env.FOURSQUARECLIENT)
-
 // Prompt user to authenticate with Strava.
 app.get('/', function(req, res) {
     res.send(templates['Home']({

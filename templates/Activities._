@@ -4,13 +4,11 @@
   <meta charset='UTF-8'/>
   <title>Location Print</title>
   <script>window.L_PREFER_CANVAS = true;</script>
-  <link href='//api.tiles.mapbox.com/mapbox.js/v1.5.1/mapbox.css' rel='stylesheet' />
+  <link href='//api.tiles.mapbox.com/mapbox.js/v1.6.0/mapbox.css' rel='stylesheet' />
   <link href='css/bootstrap.css' rel='stylesheet' />
   <link href='css/bootstrap.css' rel='stylesheet' />
   <link href='css/main.css' rel='stylesheet' />
   <link href='css/font-awesome.min.css' rel='stylesheet'>
-  <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'> -->
 </head>
 <body>
 <div id='map'></div>
@@ -22,28 +20,50 @@
       <h4>1. Choose Map Style</h4>
       <ul class='map-style map clearfix'></ul>
       <h4>2. Choose Color Style</h4>
-      <ul class='map-style line clearfix'>
-        <li>
-          <img src="https://playfoursquare.s3.amazonaws.com/press/logo/icon-36x36.png" alt="" height='32px' width='32px' class='foursquareIcon'>
-        </li>
-      </ul>
-      <div class="markerSection">
+      <ul class='map-style line clearfix'></ul>
+      <div class='markerSection'>
         <h4>3. Marker Style</h4>
-        <button type='button'class='btn btn-default'>Cirlce</button> 
-        <button type='button'class='btn btn-default'>Marker</button>
-        <button type='button'class='btn btn-default'>4sq Icons</button>
+        <button type='button'class='btn btn-default btn-circle'>Cirlce</button> 
+        <button type='button'class='btn btn-default btn-marker'>Marker</button>
+        <button type='button'class='btn btn-default btn-4sq'><img src='/images/4sq_border/4sq-small.png' alt='' height='20px' width='20px' class='foursquareIcon'></button>
       </div>
-      <div class="widthSelection">
+      <div class='widthSelection'>
         <h4>3. Width</h4>
-        1px <input type='range' name='width' min='1' max='20' class='width'> 20px
+        <input type='range' name='width' min='1' max='20' class='width'>
       </div>
       <h4>4. Opacity</h4>
-      0% <input type='range' name='opacity' min='0' max='100' class='opacity'> 100%
+      <input type='range' name='opacity' min='0' max='100' class='opacity'>
       <br>
       <br>
-      <button type='button' id='output' class='btn btn-success btn-block'>Submit!</button>
-      <div id="cp-store-root" data-cp-settings='{ "access_key": "3b97a9fb160d11e3290a88d8e805d9e5", "modal": true }'></div>
-      <button data-cp-url="https://s3.amazonaws.com/canvaspop-popupstore-dev/2013/09/15/originals/516bb914bb2bf0b6fa5ddf42ebcc3993/1ffab4942c0bb66a4b509ebc60737036.JPG" class='buynow'>Buy Now</button>
+      <button type='button' id='output' class='btn btn-success btn-block'>Generate Print!</button>
+      <div id='cp-store-root' data-cp-settings='{ 'access_key': '3b97a9fb160d11e3290a88d8e805d9e5', 'modal': true }'></div>
+      <button data-cp-url='' class='buynow'></button>
+      
+      <!-- Button trigger modal -->
+      <button class='btn btn-primary btn-lg mymodal' data-toggle='modal' data-target='#myModal'>
+        Launch demo modal
+      </button>
+
+      <!-- Modal -->
+      <div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+        <div class='modal-dialog'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+              <h4 class='modal-title' id='myModalLabel'>Generateing Print</h4>
+            </div>
+            <div class='modal-body'>
+              
+              <div class="progress progress-striped active">
+                <div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                </div>
+              </div>
+              <p class='currently'>This might take up to 30 seconds.</p>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
   </div>
 </div><!-- /container -->
 

@@ -16,7 +16,7 @@ var foursquareConfig = {
     secrets: {
         'clientId': process.env.FOURSQUARECLIENT,
         'clientSecret': process.env.FOURSQUARESECRET,
-        'redirectUrl': production + '/4sq-redirect'
+        'redirectUrl': test + '/4sq-redirect'
     }
 }
 var foursquare = require('node-4sq')(foursquareConfig);

@@ -5,7 +5,7 @@ var request = require('request');
 var templates = require('./lib/templates');
 var app = express();
 var knox = require('knox');
-var production = 'http://dataprint.me';
+var production = 'http://www.dataprint.me';
 var test = 'http://localhost:5000';
 var client = knox.createClient({
     key: process.env.AMAZONKEY,

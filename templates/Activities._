@@ -49,8 +49,7 @@
                 cpJs.parentNode.insertBefore( js, cpJs );
             }( document, 'script', 'canvaspop-jssdk' ));
         </script>
-        <button data-cp-url="https://s3.amazonaws.com/canvaspop-popupstore-dev/2013/09/15/originals/516bb914bb2bf0b6fa5ddf42ebcc3993/1ffab4942c0bb66a4b509ebc60737036.JPG" class='buynow'>Buy Now</button>
-      
+        <button data-cp-url="https://s3.amazonaws.com/canvaspop-popupstore-dev/2013/09/15/originals/516bb914bb2bf0b6fa5ddf42ebcc3993/1ffab4942c0bb66a4b509ebc60737036.JPG" class='buynow'>Buy Now</button>      
       <!-- Button trigger modal -->
       <button class='btn btn-primary btn-lg mymodal' data-toggle='modal' data-target='#myModal'>
         Launch demo modal

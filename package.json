@@ -1,7 +1,13 @@
 {
+<<<<<<< HEAD
   "name": "Data-Print",
   "version": "0.0.1",
   "description": "Print your data",
+=======
+  "name": "Location-Print",
+  "version": "0.0.1",
+  "description": "Print your strava runs",
+>>>>>>> 66dbd2be8cabfe4cd7c4462637a784b976dd6a64
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

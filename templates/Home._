@@ -16,7 +16,7 @@
 			<br>
 			<br>
 			<a href='https://www.strava.com/oauth/authorize?client_id=397&response_type=code&redirect_uri=<%= url %>/activities&scope=view_private&state=registered' class='connect'>
-        		<img src='/images/ConnectWithStrava@2x.png' height='39px'>
+        		<img src='/images/ConnectWithStrava@2x.png' height='39px'> 
     		</a>
     		<a href='/4sq-login' class='connect'>
         		<img src='/images/connect-blue@2x.png' height='42px'>

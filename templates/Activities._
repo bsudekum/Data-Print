@@ -23,7 +23,7 @@
       <ul class='map-style line clearfix'></ul>
       <div class='markerSection'>
         <h4>3. Marker Style</h4>
-        <button type='button'class='btn btn-default btn-circle'>Cirlce</button> 
+        <button type='button'class='btn btn-default btn-circle'>Circle</button> 
         <button type='button'class='btn btn-default btn-marker'>Marker</button>
         <button type='button'class='btn btn-default btn-4sq'><img src='/images/4sq_border/4sq-small.png' alt='' height='20px' width='20px' class='foursquareIcon'></button>
       </div>

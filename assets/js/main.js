@@ -30,7 +30,7 @@
 
     var mapStyles = {
         0: ['Streets', 'bobbysud.gh5h48pm'],
-        1: ['Terrain', 'bobbysud.map-8owxxni8'],
+        1: ['Terrain', 'bobbysud.h3db8o6k'],
         2: ['Satellite', 'bobbysud.map-ddwpawil'],
         3: ['Grey', 'bobbysud.map-n7u3y01e'],
         4: ['Windbreak', 'bobbysud.map-0c36p1bf'],

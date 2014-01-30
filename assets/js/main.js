@@ -89,7 +89,6 @@ function doImage(err, canvas) {
             $('.progress-bar').css('width', '100%');
             $('.currently').html('Done!');
             $('#myModal').modal('hide');
-            alert(data.url)
             $('.buynow').attr('data-cp-url', data.url).click();
         }
     });

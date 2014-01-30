@@ -37,10 +37,6 @@
       <br>
       <button type='button' id='output' class='btn btn-success btn-block'>Buy a print</button>
       <br>
-      <button type='button' id='image' class='btn btn-success btn-block'>Download Image</button>
-      <br>
-      <button type='button' id='data' class='btn btn-success btn-block'>Download Data</button>
-      <br>
       <div id="cp-store-root" data-cp-settings='{ "access_key": "3b97a9fb160d11e3290a88d8e805d9e5", "modal": true }'></div>
         <script>
             (function ( d, s, id ) {

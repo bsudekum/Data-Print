@@ -26,7 +26,7 @@ var twitterAPI = require('node-twitter-api');
 var twitter = new twitterAPI({
     consumerKey: process.env.TWITTERKEY,
     consumerSecret: process.env.TWITTERSECRET,
-    callback: 'http://127.0.0.1:5000/twitter'
+    callback: 'http://dataprint.me/twitter'
 });
 
 app.use(express.static('assets'));
@@ -38,7 +38,7 @@ app.use(express.bodyParser({
 // Prompt user to authenticate with Strava.
 app.get('/', function (req, res) {
     res.send(templates['Home']({
-        url: test
+        url: production
     }));
 });
 

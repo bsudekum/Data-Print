@@ -94,7 +94,7 @@ a:after {
   margin-top: 130px;
   color: white;
   font-size: 140px;
-  font-weight: 700;
+  font-weight: 200;
   letter-spacing: 3px;
 }
  
@@ -551,6 +551,8 @@ input[type='range'] {
   outline:0;
 }
 
-.connect {
-  margin: 0 10px;
+
+#headerwrap a img {
+  border-radius: 14px;
+  margin: 10px;
 }

@@ -14,10 +14,17 @@
   "dependencies": {
     "express": "3.4.7",
     "request": "2.27.0",
-    "underscore": "1.5.2",
+    "underscore": "~1.5.2",
     "knox": "~0.8.8",
     "pdfkit": "~0.2.6",
     "lob": "~1.0.1",
-    "node-4sq": "~0.1.7"
+    "node-4sq": "~0.1.7",
+    "node-twitter-api": "~1.1.2",
+    "twit": "~1.1.12",
+    "easyimage": "~0.1.6",
+    "imagemagick": "~0.1.3",
+    "imagemagick-composite": "~0.1.2",
+    "simple-imagemagick": "~0.2.2",
+    "gm": "~1.14.2"
   }
 }

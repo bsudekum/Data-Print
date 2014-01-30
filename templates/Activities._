@@ -17,25 +17,29 @@
     <div class='col-lg-9'></div>
     <br>
     <div class='col-lg-3'>
-      <h4>1. Choose Map Style</h4>
+      <h4>Choose Map Style</h4>
       <ul class='map-style map clearfix'></ul>
-      <h4>2. Choose Color Style</h4>
+      <h4>Choose Color Style</h4>
       <ul class='map-style line clearfix'></ul>
       <div class='markerSection'>
-        <h4>3. Marker Style</h4>
+        <h4>Marker Style</h4>
         <button type='button'class='btn btn-default btn-circle'>Circle</button> 
         <button type='button'class='btn btn-default btn-marker'>Marker</button>
         <button type='button'class='btn btn-default btn-4sq'><img src='/images/4sq_border/4sq-small.png' alt='' height='20px' width='20px' class='foursquareIcon'></button>
       </div>
       <div class='widthSelection'>
-        <h4>3. Width</h4>
+        <h4>Width</h4>
         <input type='range' name='width' min='1' max='20' class='width'>
       </div>
-      <h4>4. Opacity</h4>
+      <h4>Opacity</h4>
       <input type='range' name='opacity' min='0' max='100' class='opacity'>
       <br>
       <br>
-      <button type='button' id='output' class='btn btn-success btn-block'>Generate Print</button>
+      <button type='button' id='output' class='btn btn-success btn-block'>Buy a print</button>
+      <br>
+      <button type='button' id='image' class='btn btn-success btn-block'>Download Image</button>
+      <br>
+      <button type='button' id='data' class='btn btn-success btn-block'>Download Data</button>
       <br>
       <div id="cp-store-root" data-cp-settings='{ "access_key": "3b97a9fb160d11e3290a88d8e805d9e5", "modal": true }'></div>
         <script>
@@ -81,16 +85,29 @@
 </body>
 <script>
   var acts = <%= activitie %>
-  var athlete = <%= athlete %>
+  var user = <%= user %>
+  var type =  '<%= type %>';
 </script>
 <script src='js/jquery.js'></script>
 <script src='js/mapbox.js'></script>
 <script src='js/leaflet-image.js'></script>
 <script src='js/bootstrap.min.js'></script>
 <script src='js/encode.js'></script>
+<script src='js/simple_statistics.js'></script>
 <script src='js/main.js'></script>
-<script src='js/main4sq.js'></script>
-<script src='js/mainStrava.js'></script>
+
+<% if (type == 'twitter') { %>
+    <script src='js/twitter.js'></script>
+<% } %>
+
+<% if (type == 'strava') { %>
+    <script src='js/strava.js'></script>
+<% } %>
+
+<% if (type == 'foursquare') { %>
+    <script src='js/foursquare.js'></script>
+<% } %>
+
 <script>
 </script>
 </html>

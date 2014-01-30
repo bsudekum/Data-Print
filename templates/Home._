@@ -13,6 +13,7 @@
 	<div id='headerwrap'>
 		<div class='container'>
 			<h1>Data Print</h1>
+			<h3>Print stunning images of your location data</h3>
 			<br>
 			<a href='https://www.strava.com/oauth/authorize?client_id=397&response_type=code&redirect_uri=<%= url %>/activities&scope=view_private&state=registered' class='connect '>
         		<img src='/images/strava-square.png' height='150px' class="tool" data-toggle="tooltip" data-placement="top" title="This might take some time to load. Be patient after clicking."/>
@@ -31,14 +32,14 @@
    </div>
   <div class="tooltip-arrow"></div>
 </div>
-    		<p>Choose an app to connect with</p>
+    		
 		</div><!-- /container -->
 	</div><!-- /headerwrap -->
 	<div id='w'>
 		<div class='container'>
 			<div class='row'>
 				<div class='col-lg-8 col-lg-offset-2'>
-				<h2>Print stunning images of your location data</h2>
+				<h2>Choose an app to connect with</h2>
 				</div>
 			</div>
 		</div><!-- /container -->
@@ -46,21 +47,31 @@
 	<div id='dg'>
 		<div class='container'>
 			<div class='row'>
-				<h3>Options</h3>
+				<h3>Here is how it works</h3>
 				<br>
 				<div class='col-lg-4'>
-					<img src='images/strava-example.png' width='80%'>
-					<h4>Strava</h4>
+					<img src='images/map.gif' width='300px'>
+					<h4>Select a Map Type</h4>
 				</div>
 				<div class='col-lg-4'>
-					<img src='images/foursquare-example.png' width='80%'>
-					<h4>Foursquare</h4>
+					<img src='images/color.gif' width='300px'>
+					<h4>Choose a color</h4>
 				</div>
 				<div class='col-lg-4'>
-					<img src='images/twitter-example.png' width='80%'>
-					<h4>Twitter - Coming Soon</h4>
+					<img src='images/width.gif' width='300px'>
+					<h4>Fine tune the data</h4>
 				</div>	
+				<br>
 			</div>	
+		</div><!-- /container -->
+	</div>
+	<div id='w'>
+		<div class='container'>
+			<div class='row'>
+				<div class='col-lg-8 col-lg-offset-2'>
+				<h2>Then Click Print and hang your data on your wall!</h2>
+				</div>
+			</div>
 		</div><!-- /container -->
 	</div>
 	<div id="c">
@@ -72,9 +83,22 @@
 <script src='//code.jquery.com/jquery-1.8.2.min.js'></script>
 <script src='js/bootstrap.min.js'></script>
 <script>
-	$('.tool').tooltip({
+$(function(){
+$('.tool').tooltip({
     animated: 'fade',
     placement: 'bottom',
 });
+
+var number = 1;
+setInterval(function(){
+	$('#headerwrap').css('background','url(../images/back-' + number + '.jpg) no-repeat center top')	
+	number++
+	if(number === 4){
+		number = 1;
+	}
+},4000)
+
+})
+
 </script>
 </html>

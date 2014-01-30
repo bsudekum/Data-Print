@@ -24,8 +24,8 @@ var foursquareConfig = {
 var foursquare = require('node-4sq')(foursquareConfig);
 var twitterAPI = require('node-twitter-api');
 var twitter = new twitterAPI({
-    consumerKey: 'j0ql7JquXhsBhJ4RuILFw',
-    consumerSecret: 'tsKk0apu7niFkm51e8xZBiFyfcllZLmcKe6Q7rl6Ei0',
+    consumerKey: process.env.TWITTERKEY,
+    consumerSecret: process.env.TWITTERSECRET,
     callback: 'http://127.0.0.1:5000/twitter'
 });
 

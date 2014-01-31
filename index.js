@@ -26,7 +26,7 @@ var twitterAPI = require('node-twitter-api');
 var twitter = new twitterAPI({
     consumerKey: process.env.TWITTERKEY,
     consumerSecret: process.env.TWITTERSECRET,
-    callback: 'http://dataprint.me/twitter'
+    callback: 'http://www.dataprint.me/twitter'
 });
 
 app.use(express.static('assets'));

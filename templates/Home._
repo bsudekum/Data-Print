@@ -89,12 +89,12 @@ $('.tool').tooltip({
     placement: 'bottom',
 });
 
-var number = 1;
+var number = 0;
 setInterval(function(){
-	$('#headerwrap').css('background','url(../images/back-' + number + '.jpg) no-repeat center top')	
+	$('#headerwrap').css('background','url(../images/back-' + number + '.jpg) no-repeat center top').css('background-size','cover')
 	number++
 	if(number === 4){
-		number = 1;
+		number = 0;
 	}
 },4000)
 

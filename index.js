@@ -26,7 +26,7 @@ var twitterAPI = require('node-twitter-api');
 var twitter = new twitterAPI({
     consumerKey: process.env.TWITTERKEY,
     consumerSecret: process.env.TWITTERSECRET,
-    callback: 'http://www.dataprint.me/twitter'
+    callback: 'http://127.0.0.1:5000/twitter'
 });
 
 app.use(express.static('assets'));
@@ -47,11 +47,14 @@ app.get('/twitter-login', function (req, res) {
         if (error) {
             console.log("Error getting OAuth request token : " + error);
         } else {
+            
             res.redirect('https://twitter.com/oauth/authenticate?oauth_token=' + requestToken);
 
+            console.log(req)
             app.get('/twitter', function (req, res) {
+                console.log('hit2')
                 twitter.getAccessToken(requestToken, req.query.oauth_token, req.query.oauth_verifier, function (error, accessToken, accessTokenSecret, results) {
-
+                    console.log(req.query)
                     if (error) {
                         if (error.statusCode == 401) {
                             console.log(JSON.stringify(error))
@@ -79,7 +82,7 @@ app.get('/twitter-login', function (req, res) {
                                             if (error) {
                                                 console.log(JSON.stringify(error))
                                             } else {
-                                                if (dataTweets.length == 0) {
+                                                if (dataTweets.length == 0 || add == 2) {
                                                     res.send(templates['Activities']({
                                                         type: 'twitter',
                                                         activitie: JSON.stringify(tweets),

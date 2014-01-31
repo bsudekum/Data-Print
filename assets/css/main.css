@@ -414,7 +414,8 @@ hr {
     height:30px!important;
     width: 30px !important;
 }
-.col-lg-3 {
+.col-lg-3 .fifty {
+    width: 128px;
 }
 body.strava .markerSection {
     display: none
@@ -447,4 +448,21 @@ input[type='range'] {
 #headerwrap a img {
     border-radius: 14px;
     margin: 10px;
+}
+.center {
+    text-align: center;
+}
+input[type=range], input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+input[type=range] {
+    display: inline-block!important;
+    vertical-align: middle;
+    height: 12px;
+    padding: 0 2px;
+    border: 2px solid transparent;
+    background: rgba(0, 0, 0, 0.25);
+    min-width: 100px;
+    overflow: hidden;
+    cursor: pointer;
 }

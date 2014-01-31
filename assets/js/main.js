@@ -64,13 +64,11 @@ $.each(mapStyles, function (key, value) {
     $('.map-style.map').append('' +
         '<li class=' + value[1] + '>' +
         '<img src="https://api.tiles.mapbox.com/v3/' + value[1] + '/-122.4461,37.7580,13/65x65.png" />' +
-        '<div>' + value[0] + '</div>' +
         '</li>')
 });
 
 $('#output').click(function () {
     $('#myModal').modal('show')
-    $(this).attr('disabled', 'disabled');
     leafletImage(map, doImage);
 });
 

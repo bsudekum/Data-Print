@@ -1,5 +1,6 @@
 var provider = 'strava';
 $('body').addClass('strava');
+
 var userLoc = user.city + ', ' + user.state;
 var geocoder = L.mapbox.geocoder('bobbysud.gh5h48pm');
 geocoder.query(userLoc, showMap);

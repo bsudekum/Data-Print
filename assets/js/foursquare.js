@@ -1,5 +1,6 @@
 var provider = 'foursquare';
 $('body').addClass('foursquare');
+$('button.fifty').css('width','32%')
 
 $('.map-style.line li').click(function (e) {
     var colorClicked = '#' + $(this).attr('class');

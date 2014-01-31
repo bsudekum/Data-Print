@@ -1,4 +1,5 @@
 $('body').addClass('twitter');
+$('.btn-4sq').hide()
 
 function addTwitter(data, style) {
 
@@ -7,13 +8,14 @@ function addTwitter(data, style) {
 
             if (style == 'circle') {
 
-                if(data.favorite_count + data.retweet_count > 50){
+                if (data.favorite_count + data.retweet_count > 50) {
                     var num = 50;
-                } else if(data.favorite_count + data.retweet_count < 5){
-                    var num = 5;
+                } else if (data.favorite_count + data.retweet_count < 3) {
+                    var num = 3;
                 } else {
                     var num = data.favorite_count + data.retweet_count;
                 }
+                console.log(num)
 
                 L.circle([data.geo.coordinates[0], data.geo.coordinates[1]], num * 80, {
                     stroke: false,
@@ -47,21 +49,17 @@ function addItems(shape) {
         for (var p = 0; p < acts[i].length; p++) {
             addTwitter(acts[i][p], shape)
             geoGroup.addTo(map);
-            // if (p == acts[i][p].length - 1) {
-            //     geoGroup.addTo(map);
-            // }
         }
-
     }
 }
 
 addItems('marker');
 
-// for (var i = 0; i < acts.length; i++) {
-//     if (i == acts.length - 1) {
-//         map.setView([geoGroup.getLayers()[0].getLatLng().lat, geoGroup.getLayers()[0].getLatLng().lng], 14);
-//     }
-// }
+for (var i = 0; i < acts.length; i++) {
+    if (i == acts.length - 1) {
+        map.setView(geoGroup.getLayers()[0].getLatLng(), 13)
+    }
+}
 
 $('.map-style.line li').click(function (e) {
     var colorClicked = '#' + $(this).attr('class');

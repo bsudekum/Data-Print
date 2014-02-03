@@ -18,7 +18,7 @@ var foursquareConfig = {
     secrets: {
         'clientId': process.env.FOURSQUARECLIENT,
         'clientSecret': process.env.FOURSQUARESECRET,
-        'redirectUrl': production + '/4sq-redirect'
+        'redirectUrl': production + '/foursquare'
     }
 }
 var foursquare = require('node-4sq')(foursquareConfig);
@@ -81,7 +81,7 @@ app.get('/twitter-login', function (req, res) {
                                             if (error) {
                                                 console.log(JSON.stringify(error))
                                             } else {
-                                                if (dataTweets.length == 0 || add == 2) {
+                                                if (dataTweets.length == 0 || add == 10) {
                                                     res.send(templates['Activities']({
                                                         type: 'twitter',
                                                         activitie: JSON.stringify(tweets),
@@ -107,7 +107,7 @@ app.get('/twitter-login', function (req, res) {
 })
 
 // Do Strava token exchange, and return a page of activities
-app.get('/activities', function (req, res) {
+app.get('/strava', function (req, res) {
     request.post({
         url: 'https://www.strava.com/oauth/token',
         form: {
@@ -120,7 +120,6 @@ app.get('/activities', function (req, res) {
 
         try {
             var tok = JSON.parse(resp.body);
-            console.log(tok)
             var athleteInfo = tok.athlete;
         } catch (err) {
             res.send(500);
@@ -130,7 +129,6 @@ app.get('/activities', function (req, res) {
         getActivities({
             token: tok.access_token
         }, function (err, acts) {
-            console.log(acts)
             res.send(templates['Activities']({
                 type: 'strava',
                 activitie: JSON.stringify(acts),
@@ -189,7 +187,7 @@ app.get('/4sq-login', function (req, res) {
     res.end();
 });
 
-app.get('/4sq-redirect', function (req, res) {
+app.get('/foursquare', function (req, res) {
     foursquare.getAccessToken({
         code: req.query.code
     }, function (err, accessToken) {
@@ -212,7 +210,7 @@ app.get('/4sq-redirect', function (req, res) {
                             res.end();
                         }
 
-                        allData.push(JSON.stringify(resp.body))
+                        allData.push(resp.body)
 
                         // res.send(templates['Activities']({
                         //     type: 'foursquare',
@@ -240,7 +238,7 @@ app.get('/4sq-redirect', function (req, res) {
     });
 });
 
-app.post('/image', function (req, res) {
+app.post('/image-watermark', function (req, res) {
     res.contentType('json');
     var stringImage = req.body.image;
     var string = new Buffer(stringImage.replace(/^data:image\/\w+;base64,/, ''), 'base64');
@@ -275,6 +273,31 @@ app.post('/image', function (req, res) {
         opts.end(new Buffer(file, 'binary'));
 
     });
+});
+
+app.post('/image', function(req, res) {
+    res.contentType('json');
+    var stringImage = req.body.image;
+    var string = new Buffer(stringImage.replace(/^data:image\/\w+;base64,/, ''), 'base64');
+    var buf = string;
+
+    var opts = client.put('img' + parseInt((Math.random() * 10000000) + 1) + '.png', {
+        'Content-Length': buf.length,
+        'Content-Type': 'image/png',
+        'x-amz-acl': 'public-read'
+    });
+
+    opts.on('response', function(resOpts) {
+        if (200 == resOpts.statusCode) {
+            res.send({
+                data: JSON.stringify({
+                    url: opts.url
+                })
+            });
+        }
+    });
+
+    opts.end(buf)
 });
 
 

@@ -1,4 +1,4 @@
-(function(e) {
+(function (e) {
     if ("function" == typeof bootstrap) bootstrap("leafletimage", e);
     else if ("object" == typeof exports) module.exports = e();
     else if ("function" == typeof define && define.amd) define(e);
@@ -6,7 +6,7 @@
         if (!ses.ok()) return;
         ses.makeLeafletImage = e
     } else "undefined" != typeof window ? window.leafletImage = e() : global.leafletImage = e()
-})(function() {
+})(function () {
     var define, ses, bootstrap, module, exports;
     return (function e(t, n, r) {
         function s(o, u) {
@@ -20,7 +20,7 @@
                 var f = n[o] = {
                     exports: {}
                 };
-                t[o][0].call(f.exports, function(e) {
+                t[o][0].call(f.exports, function (e) {
                     var n = t[o][1][e];
                     return s(n ? n : e)
                 }, f, f.exports, e, t, n, r)
@@ -33,7 +33,7 @@
     })({
         1: [
 
-            function(require, module, exports) {
+            function (require, module, exports) {
                 var queue = require('./queue');
 
                 // leaflet-image
@@ -52,10 +52,17 @@
                     map.eachLayer(drawTileLayer);
                     if (map._pathRoot) layerQueue.defer(handlePathRoot, map._pathRoot);
                     map.eachLayer(drawMarkerLayer);
+                    map.eachLayer(drawCanvasLayer);
                     layerQueue.awaitAll(layersDone);
 
                     function drawTileLayer(l) {
                         if (l instanceof L.TileLayer) layerQueue.defer(handleTileLayer, l);
+                    }
+
+                    function drawCanvasLayer(l) {
+                        if (l instanceof L.HeatLayer) {
+                            layerQueue.defer(handleCanvasLayer, l);
+                        }
                     }
 
                     function drawMarkerLayer(l) {
@@ -70,7 +77,7 @@
 
                     function layersDone(err, layers) {
                         if (err) throw err;
-                        layers.forEach(function(layer) {
+                        layers.forEach(function (layer) {
                             if (layer && layer.canvas) {
                                 ctx.drawImage(layer.canvas, 0, 0);
                             }
@@ -115,7 +122,7 @@
                             }
                         }
 
-                        tiles.forEach(function(tilePoint) {
+                        tiles.forEach(function (tilePoint) {
                             var originalTilePoint = tilePoint.clone();
 
                             layer._adjustTilePoint(tilePoint);
@@ -136,7 +143,7 @@
                             $('.progress-bar').css('width', '20%');
                             var im = new Image();
                             im.crossOrigin = '';
-                            im.onload = function() {
+                            im.onload = function () {
                                 callback(null, {
                                     img: this,
                                     pos: tilePos,
@@ -159,7 +166,25 @@
                         }
                     }
 
+                    function handleCanvasLayer(layer, callback) {
+                        var pixelBounds = map.getPixelBounds();
+                        var bounds = map.getPixelBounds();
+                        var origin = map.getPixelOrigin();
+                        var canvas = document.createElement('canvas');
+                        var ctx = canvas.getContext('2d');
+                        canvas.width = dimensions.x;
+                        canvas.height = dimensions.y;
+                        var ctx = canvas.getContext('2d');
+                        // var pos = L.DomUtil.getPosition(layer).subtract(bounds.min).add(origin);
+
+                        ctx.drawImage(layer._canvas, 10, 10, 100, 100);
+                        callback(null, {
+                            canvas: canvas
+                        });
+                    }
+
                     function handlePathRoot(root, callback) {
+                        
                         var bounds = map.getPixelBounds();
                         var origin = map.getPixelOrigin();
                         var canvas = document.createElement('canvas');
@@ -167,6 +192,7 @@
                         canvas.height = dimensions.y;
                         var ctx = canvas.getContext('2d');
                         var pos = L.DomUtil.getPosition(root).subtract(bounds.min).add(origin);
+                        
                         ctx.drawImage(root, pos.x, pos.y);
                         callback(null, {
                             canvas: canvas
@@ -190,7 +216,7 @@
                         canvas.height = dimensions.y;
                         im.crossOrigin = '';
 
-                        im.onload = function() {
+                        im.onload = function () {
                             ctx.drawImage(this, x, y, size[0], size[1]);
                             callback(null, {
                                 canvas: canvas
@@ -207,8 +233,8 @@
         ],
         2: [
 
-            function(require, module, exports) {
-                (function() {
+            function (require, module, exports) {
+                (function () {
                     if (typeof module === "undefined") self.queue = queue;
                     else module.exports = queue;
                     queue.version = "1.0.4";
@@ -240,7 +266,7 @@
                         }
 
                         function callback(i) {
-                            return function(e, r) {
+                            return function (e, r) {
                                 --active;
                                 if (error != null) return;
                                 if (e != null) {
@@ -262,7 +288,7 @@
                         }
 
                         return q = {
-                            defer: function() {
+                            defer: function () {
                                 if (!error) {
                                     tasks.push(arguments);
                                     ++remaining;
@@ -270,13 +296,13 @@
                                 }
                                 return q;
                             },
-                            await: function(f) {
+                            await: function (f) {
                                 await = f;
                                 all = false;
                                 if (!remaining) notify();
                                 return q;
                             },
-                            awaitAll: function(f) {
+                            awaitAll: function (f) {
                                 await = f;
                                 all = true;
                                 if (!remaining) notify();

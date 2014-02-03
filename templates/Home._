@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset='UTF-8'/>
-  <title>Data Print</title>
-  <link href='css/bootstrap.css' rel='stylesheet' />
-  <link href='css/main.css' rel='stylesheet' />
-  <link href='css/font-awesome.min.css' rel='stylesheet'>
+	<meta charset='UTF-8'/>
+	<title>Data Print</title>
+	<meta name='twitter:card' content='summary_large_image'>
+	<meta name='twitter:site' content='@bobws'>
+	<meta name='twitter:title' content='Print stunning images of your location data.'>
+	<meta name='twitter:description' content='Login with Twitter, Strava or Foursquare. Style your data and your map, and then press print. A high quality framed image of your data is then sent to you.'>
+	<meta name='twitter:creator' content='@bobws'>
+	<meta name='twitter:image:src' content='https://mapbox-bobby-image.s3.amazonaws.com/img8113930.png'>
+	<meta name='twitter:domain' content='dataprint.me'>
+	<meta name='twitter:app:name:iphone' content=''>
+	<meta name='twitter:app:name:ipad' content=''>
+	<meta name='twitter:app:name:googleplay' content=''>
+	<meta name='twitter:app:url:iphone' content=''>
+	<meta name='twitter:app:url:ipad' content=''>
+	<meta name='twitter:app:url:googleplay' content=''>
+	<meta name='twitter:app:id:iphone' content=''>
+	<meta name='twitter:app:id:ipad' content=''>
+	<meta name='twitter:app:id:googleplay' content=''>
+	<link href='css/bootstrap.css' rel='stylesheet' />
+	<link href='css/main.css' rel='stylesheet' />
+	<link href='css/font-awesome.min.css' rel='stylesheet'>
 </head>
 <body>
 	<!-- ========== HEADER SECTION ========== -->
@@ -15,22 +31,17 @@
 			<h1>Data Print</h1>
 			<h3>Print stunning images of your location data</h3>
 			<br>
-			<a href='https://www.strava.com/oauth/authorize?client_id=397&response_type=code&redirect_uri=<%= url %>/activities&scope=view_private&state=registered' class='connect '>
-        		<img src='/images/strava-square.png' height='150px' class="tool" data-toggle="tooltip" data-placement="top" title="This might take some time to load. Be patient after clicking."/>
+			<a href='https://www.strava.com/oauth/authorize?client_id=397&response_type=code&redirect_uri=<%= url %>/strava&scope=view_private&state=registered' class='connect '>
+        		<img src='/images/strava-square.png' height='150px' class='tool' data-toggle='tooltip' data-placement='top' title='This might take some time to load. Be patient after clicking.'/>
     		</a>
     		<a href='/4sq-login' class='connect'>
-        		<img src='/images/4sq-square.png' height='150px' class="tool" data-toggle="tooltip" data-placement="top" title="This might take some time to load. Be patient after clicking."/>
+        		<img src='/images/4sq-square.png' height='150px' class='tool' data-toggle='tooltip' data-placement='top' title='This might take some time to load. Be patient after clicking.'/>
     		</a>
     		<a href='/twitter-login' class='connect'>
-        		<img src='/images/twitter-square.png' height='150px' class="tool" data-toggle="tooltip" data-placement="top" title="This might take some time to load. Be patient after clicking."/>
+        		<img src='/images/twitter-square.png' height='150px' class='tool' data-toggle='tooltip' data-placement='top' title='This might take some time to load. Be patient after clicking.'/>
     		</a>
     		<br>
     		<br>
-    		<div class="tooltip">
-   <div class="tooltip-inner">
-     Tooltip!
-   </div>
-  <div class="tooltip-arrow"></div>
 </div>
     		
 		</div><!-- /container -->
@@ -63,20 +74,33 @@
 				</div>	
 				<br>
 			</div>	
+			<div class='modal fade' id='warning-modal' tabindex='-1' role='dialog' aria-labelledby='warning-modalLabel' aria-hidden='true'>
+				<div class='modal-dialog'>
+					<div class='modal-content'>
+						<div class='modal-body'>
+							<h3>Cool, please be patient while your data is gathered.</h3>
+							<p>This might take a moment.</p>
+							<div class='progress progress-striped active'>
+								<div class='progress-bar'  role='progressbar' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100' style='width: 100%'></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div><!-- /container -->
 	</div>
 	<div id='w'>
 		<div class='container'>
 			<div class='row'>
 				<div class='col-lg-8 col-lg-offset-2'>
-				<h2>Then Click Print and hang your data on your wall!</h2>
+				<h2>Then Click Print. A high quality print is then sent to you.</h2>
 				</div>
 			</div>
 		</div><!-- /container -->
 	</div>
-	<div id="c">
-		<div class="container">
-			<p>Created by <a href="http://visuallybs.com">Bobby Sudekum</a></p>
+	<div id='c'>
+		<div class='container'>
+			<p>Created by <a href='http://visuallybs.com'>Bobby Sudekum</a></p>
 		</div>
 	</div>
 </body>
@@ -84,21 +108,24 @@
 <script src='js/bootstrap.min.js'></script>
 <script>
 $(function(){
-$('.tool').tooltip({
-    animated: 'fade',
-    placement: 'bottom',
+	$('.tool').tooltip({
+	    animated: 'fade',
+	    placement: 'bottom',
+	});
+
+	var number = 0;
+	setInterval(function(){
+		$('#headerwrap').css('background','url(../images/back-' + number + '.jpg) no-repeat center top').css('background-size','cover')
+		number++
+		if(number === 4){
+			number = 0;
+		}
+	},4000);
+
+	$('#headerwrap a').click(function(){
+		$('#warning-modal').modal('show')
+	});
 });
-
-var number = 0;
-setInterval(function(){
-	$('#headerwrap').css('background','url(../images/back-' + number + '.jpg) no-repeat center top').css('background-size','cover')
-	number++
-	if(number === 4){
-		number = 0;
-	}
-},4000)
-
-})
 
 </script>
 </html>

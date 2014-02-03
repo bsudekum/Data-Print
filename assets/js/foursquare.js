@@ -22,18 +22,29 @@ $('.map-style.line li').click(function (e) {
     }
 });
 
-
+var heatPoints = [];
 function add4sq(data, style) {
     if (data) {
         try {
-            var c = JSON.parse(JSON.parse(data))
-            console.log(c)
+            var c = JSON.parse(data);
         } catch (e) {
             console.log(e)
         }
 
         var checkins = c.response.checkins.items;
         for (var i = 0; i < checkins.length; i++) {
+
+            if(checkins[i].venue.beenHere.count > 50){
+                var num = 50;
+            } else if(checkins[i].venue.beenHere.count < 5){
+                var num = 5;
+            } else {
+                var num = checkins[i].venue.beenHere.count;
+            }
+
+            if(checkins[i].venue.beenHere.count < 5){
+                
+            }
 
             if (style == 'icon') {
                 var uri = '/images/4sq_border/' + checkins[i].venue.categories[0].icon.prefix.split('/')[5] + '/' + checkins[i].venue.categories[0].icon.prefix.split('/')[6].slice(0, -1) + '.png';
@@ -55,17 +66,6 @@ function add4sq(data, style) {
             }
             if (style == 'circle') {
                 
-                if(checkins[i].venue.beenHere.count > 50){
-                    var num = 50;
-                } else if(checkins[i].venue.beenHere.count < 5){
-                    var num = 5;
-                } else {
-                    var num = checkins[i].venue.beenHere.count;
-                }
-
-                if(checkins[i].venue.beenHere.count < 5){
-                    
-                }
 
                 L.circle([checkins[i].venue.location.lat, checkins[i].venue.location.lng], num * 10, {
                     stroke: false,
@@ -88,6 +88,11 @@ function add4sq(data, style) {
                     .addTo(geoGroup);
                 $('.map-style.line').removeClass('circle');
                 $('.map-style.line').addClass('marker');
+            }
+
+            if(style == 'heatmap'){
+                heatPoints.push([checkins[i].venue.location.lat, checkins[i].venue.location.lng])
+                L.heatLayer(heatPoints, {maxZoom: 18}).addTo(geoGroup);
             }
 
             if (i == checkins.length - 1) {

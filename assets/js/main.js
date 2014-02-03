@@ -69,12 +69,21 @@ $.each(mapStyles, function (key, value) {
 
 $('#output').click(function () {
     $('#myModal').modal('show')
-    leafletImage(map, doImage);
+    leafletImage(map, noWatermark);
 });
 
-function doImage(err, canvas) {
+$('.download-image').click(function () {
+    $('#myModal').modal('show')
+    leafletImage(map, watermark);
+});
+
+console.log(L.tileLayer)
+console.log(L.TileLayer.Canvas)
+
+function noWatermark(err, canvas) {
     var imgSend = canvas.toDataURL();
     $('.progress-bar').css('width', '10%');
+    $('.currently').html('This might take up to 30 seconds.');
     $.ajax({
         url: '/image',
         type: 'POST',
@@ -93,6 +102,39 @@ function doImage(err, canvas) {
     $('.progress-bar').css('width', '70%');
 };
 
+function watermark(err, canvas) {
+    $('.holder').remove();
+    var imgSend = canvas.toDataURL();
+    $('.progress-bar').css('width', '10%');
+    $('.currently').html('This might take up to 30 seconds.');
+    $.ajax({
+        url: '/image-watermark',
+        type: 'POST',
+        data: {
+            image: imgSend,
+        },
+        success: function (e) {
+            $('.progress-bar').css('width', '90%');
+            var data = JSON.parse(e.data);
+            $('.progress-bar').css('width', '100%');
+            $('.currently').html('Done!');
+            $('#myModal').modal('hide');
+            var imageHolder = document.createElement('a');
+            $(imageHolder).addClass('holder').append('<span></span>')
+            $('.download-image').after(imageHolder);
+            $(imageHolder).attr('href', data.url).attr('download', 'image.png');
+            $('.holder span').click()
+        }
+    });
+    $('.progress-bar').css('width', '70%');
+};
+
+$('.download-data').click(function () {
+    var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(acts));
+    $('.download-data').attr('href', 'data:' + data)
+})
+
+
 function clearMap() {
     for (i in map._layers) {
         if (map._layers[i]._tiles !== undefined) {
@@ -103,9 +145,7 @@ function clearMap() {
 
 $('.width').change(function () {
     if ($('.map-style.line').hasClass('circle')) {
-        console.log('git')
         geoGroup.eachLayer(function (layer) {
-            console.log(layer.getRadius())
             layer.setRadius(($('.width').val() / 10) * layer.getRadius());
         });
     } else {

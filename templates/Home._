@@ -3,6 +3,7 @@
 <head>
 	<meta charset='UTF-8'/>
 	<title>Data Print</title>
+	<link rel='shortcut icon' href='/public/favicon.png'>
 	<meta name='twitter:card' content='summary_large_image'>
 	<meta name='twitter:site' content='@bobws'>
 	<meta name='twitter:title' content='Print stunning images of your location data.'>

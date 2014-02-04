@@ -65,14 +65,12 @@ function add4sq(data, style) {
                 $('.map-style.line').removeClass('circle');
             }
             if (style == 'circle') {
-                
-
                 L.circle([checkins[i].venue.location.lat, checkins[i].venue.location.lng], num * 10, {
                     stroke: false,
                     fillColor: '#548cba',
                     fillOpacity: .8
                 })
-                    .bindPopup(checkins[i].venue.beenHere.count)
+                    .bindPopup(checkins[i].venue.name)
                     .addTo(geoGroup);
                 $('.map-style.line').removeClass('marker');
                 $('.map-style.line').addClass('circle');
@@ -123,6 +121,6 @@ function addItems(shape) {
     }
 }
 
-addItems('circle')
+addItems('icon')
 
 map.setView(geoGroup.getLayers()[0].getLatLng(), 13)

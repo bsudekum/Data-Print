@@ -31,6 +31,10 @@ var twitter = new twitterAPI({
 
 app.use(express.static('assets'));
 app.use(express.cookieParser());
+app.use(express.session({
+    secret: 'data'
+}));
+
 app.use(express.bodyParser({
     limit: '50mb'
 }));
@@ -43,68 +47,73 @@ app.get('/', function (req, res) {
 });
 
 app.get('/twitter-login', function (req, res) {
+
     twitter.getRequestToken(function (error, requestToken, requestTokenSecret, results) {
         if (error) {
             console.log("Error getting OAuth request token : " + error);
         } else {
-            
+            req.session.requestToken = requestToken;
+            req.session.requestTokenSecret = requestTokenSecret;
             res.redirect('https://twitter.com/oauth/authenticate?oauth_token=' + requestToken);
-
-            console.log(req)
-            app.get('/twitter', function (req, res) {
-
-                twitter.getAccessToken(requestToken, req.query.oauth_token, req.query.oauth_verifier, function (error, accessToken, accessTokenSecret, results) {
-                    if (error) {
-                        if (error.statusCode == 401) {
-                            console.log(JSON.stringify(error))
-                            res.redirect('/');
-                        }
-                    } else {
-                        twitter.verifyCredentials(accessToken, accessTokenSecret, function (error, dataUser, response) {
-                            if (error) {
-                                console.log(JSON.stringify(error))
-                            } else {
-
-                                var tweets = [];
-                                var add = 1;
-                                var user = dataUser['screen_name'];
-
-                                function repeat(pageNumber) {
-                                    twitter.getTimeline('user_timeline', {
-                                            screen_name: user,
-                                            count: 200,
-                                            page: pageNumber
-                                        },
-                                        accessToken,
-                                        accessTokenSecret,
-                                        function (error, dataTweets, response) {
-                                            if (error) {
-                                                console.log(JSON.stringify(error))
-                                            } else {
-                                                if (dataTweets.length == 0 || add == 10) {
-                                                    res.send(templates['Activities']({
-                                                        type: 'twitter',
-                                                        activitie: JSON.stringify(tweets),
-                                                        user: JSON.stringify(0)
-                                                    }));
-                                                } else {
-                                                    tweets.push(dataTweets)
-                                                    console.log(add)
-                                                    repeat(add++)
-                                                }
-                                            }
-                                        }
-                                    );
-                                }
-                                repeat(add)
-                            }
-                        });
-                    }
-                });
-            });
         }
     });
-})
+
+});
+
+app.get('/twitter', function (req, res) {
+    if (req.session.requestToken) {
+        twitter.getAccessToken(req.session.requestToken, req.session.requestTokenSecret, req.query.oauth_verifier, function (error, accessToken, accessTokenSecret, results) {
+            if (error) {
+                if (error.statusCode == 401) {
+                    console.log(JSON.stringify(error))
+                    res.redirect('/twitter-login');
+                }
+            } else {
+                twitter.verifyCredentials(accessToken, accessTokenSecret, function (error, dataUser, response) {
+                    if (error) {
+                        console.log(JSON.stringify(error))
+                    } else {
+
+                        var tweets = [];
+                        var add = 1;
+                        var user = dataUser['screen_name'];
+
+                        function repeat(pageNumber) {
+                            twitter.getTimeline('user_timeline', {
+                                    screen_name: user,
+                                    count: 200,
+                                    page: pageNumber
+                                },
+                                accessToken,
+                                accessTokenSecret,
+                                function (error, dataTweets, response) {
+                                    if (error) {
+                                        console.log(JSON.stringify(error))
+                                    } else {
+                                        if (dataTweets.length == 0 || add == 10) {
+                                            res.send(templates['Activities']({
+                                                type: 'twitter',
+                                                activitie: JSON.stringify(tweets),
+                                                user: JSON.stringify(0)
+                                            }));
+                                        } else {
+                                            tweets.push(dataTweets)
+                                            console.log(add)
+                                            repeat(add++)
+                                        }
+                                    }
+                                }
+                            );
+                        }
+                        repeat(add)
+                    }
+                });
+            }
+        });
+    } else {
+        res.redirect('/twitter-login');
+    }
+});
 
 // Do Strava token exchange, and return a page of activities
 app.get('/strava', function (req, res) {
@@ -275,7 +284,7 @@ app.post('/image-watermark', function (req, res) {
     });
 });
 
-app.post('/image', function(req, res) {
+app.post('/image', function (req, res) {
     res.contentType('json');
     var stringImage = req.body.image;
     var string = new Buffer(stringImage.replace(/^data:image\/\w+;base64,/, ''), 'base64');
@@ -287,7 +296,7 @@ app.post('/image', function(req, res) {
         'x-amz-acl': 'public-read'
     });
 
-    opts.on('response', function(resOpts) {
+    opts.on('response', function (resOpts) {
         if (200 == resOpts.statusCode) {
             res.send({
                 data: JSON.stringify({

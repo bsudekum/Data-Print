@@ -452,3 +452,9 @@ input[type='range'] {
 .center {
     text-align: center;
 }
+
+small .muted {
+    margin: 10px 0;
+    color:#ACACAC;
+    font-size: 12px;
+}

@@ -57,8 +57,7 @@
       <a type='button' class='btn btn-default fifty download-image' href='#' title="ImageName">
           <span>Download Image</span>
       </a>
-      <br>
-      <br>
+      <small><a href="/" class='pull-right muted'>Home</a></small>
       <div id="cp-store-root" data-cp-settings='{ "access_key": "3b97a9fb160d11e3290a88d8e805d9e5", "modal": true }'></div>
         <script>
             (function ( d, s, id ) {
@@ -112,7 +111,6 @@
 <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-heat/v0.0.1/leaflet-heat.js'></script>
 <script src='js/bootstrap.min.js'></script>
 <script src='js/encode.js'></script>
-<script src='js/simple_statistics.js'></script>
 <script src='js/main.js'></script>
 
 <% if (type == 'twitter') { %>

@@ -121,6 +121,6 @@ function addItems(shape) {
     }
 }
 
-addItems('icon')
+addItems('circle')
 
 map.setView(geoGroup.getLayers()[0].getLatLng(), 13)
